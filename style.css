@@ -6,6 +6,7 @@ body {
 
 h1 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 form {
@@ -30,6 +31,7 @@ label {
 input[type="range"] {
   flex: 1;
   margin: 0 10px;
+  accent-color: #2196f3; /* スライダー色を明示的に */
 }
 
 .value-display {
@@ -39,7 +41,7 @@ input[type="range"] {
 
 button {
   display: block;
-  margin: 30px auto 0;
+  margin: 30px auto 20px;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #2196f3;
@@ -51,4 +53,25 @@ button {
 
 button:hover {
   background-color: #1976d2;
+}
+
+/* モバイル対応 */
+@media (max-width: 480px) {
+  .slider-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  label {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  input[type="range"] {
+    margin: 0;
+  }
+
+  .value-display {
+    margin-top: 5px;
+  }
 }
