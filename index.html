@@ -7,22 +7,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>性癖シート</h1>
-  <form id="seihekiForm">
-    <div class="slider-item">
-      <label for="jitunennrei">実年齢:</label>
-      <input type="range" min="-10" max="10" value="0" id="jitunennrei" />
-      <span class="value-display" id="jitunennreiValue">0</span>
-    </div>
+  <div id="sheetWrapper">
+    <h1>性癖シート</h1>
+    <form id="seihekiForm">
+      <div class="slider-item">
+        <label for="jitunennrei">実年齢:</label>
+        <input type="range" min="-10" max="10" value="0" id="jitunennrei" />
+        <span class="value-display" id="jitunennreiValue">0</span>
+      </div>
 
-    <div class="slider-item">
-      <label for="mitamenonennrei">見た目の年齢:</label>
-      <input type="range" min="-10" max="10" value="0" id="mitamenonennrei" />
-      <span class="value-display" id="mitamenonennreiValue">0</span>
-    </div>
+      <div class="slider-item">
+        <label for="mitamenonennrei">見た目の年齢:</label>
+        <input type="range" min="-10" max="10" value="0" id="mitamenonennrei" />
+        <span class="value-display" id="mitamenonennreiValue">0</span>
+      </div>
 
-    <button type="button" id="saveBtn" onclick="downloadPDF()">PDFとして保存</button>
-  </form>
+      <button type="button" id="saveBtn" onclick="downloadPDF()">PDFとして保存</button>
+    </form>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
