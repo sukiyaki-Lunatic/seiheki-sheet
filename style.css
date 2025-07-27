@@ -1,21 +1,39 @@
 body {
   font-family: sans-serif;
-  padding: 20px;
-  background-color: #f5f5f5;
+  margin: 20px;
 }
+
 label {
   display: block;
-  margin: 10px 0;
+  margin-top: 20px;
+  font-weight: bold;
 }
-.value {
-  display: inline-block;
-  width: 30px;
-  text-align: right;
-  font-family: monospace;
+
+input[type="range"] {
+  width: 200px;
+  margin-top: 5px;
 }
-table {
-  margin-bottom: 1em;
+
+.slider-print {
+  display: none;
+  width: 200px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+  position: relative;
 }
-td {
-  padding: 0.3em;
+
+.slider-fill {
+  height: 100%;
+  background-color: #2196F3;
+  width: 50%;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
 }
