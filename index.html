@@ -1,31 +1,90 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>性癖シート</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>スライダーPDF</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+    }
+
+    .slider-print {
+      display: none;
+      width: 200px;
+      height: 10px;
+      background-color: #ddd;
+      position: relative;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .slider-fill {
+      height: 100%;
+      background-color: #2196F3;
+      width: 50%;
+      border-radius: 5px;
+    }
+
+    @media print {
+      .no-print {
+        display: none;
+      }
+
+      input[type=range] {
+        display: none;
+      }
+
+      .slider-print {
+        display: block;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>性癖シート</h1>
-  <form id="seihekiForm">
-    <table>
-      <tr>
-        <td><label for="jitunennrei">実年齢:</label></td>
-        <td><input type="range" min="-10" max="10" value="0" id="jitunennrei" /></td>
-        <td><span id="jitunennreiValue" class="value">0</span></td>
-      </tr>
-      <tr>
-        <td><label for="mitamenonennrei">見た目の年齢:</label></td>
-        <td><input type="range" min="-10" max="10" value="0" id="mitamenonennrei" /></td>
-        <td><span id="mitamenonennreiValue" class="value">0</span></td>
-      </tr>
-      </table>
-    <!-- 他の項目をここに追加できます -->
+  <h1>スライダーをPDFで保存するテスト</h1>
 
-    <button type="button" onclick="downloadPDF()">PDFとして保存</button>
-  </form>
-  <script src="script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <label for="jitunennrei">実年齢：
+    <span id="jitunennreiValue">±0歳</span>
+  </label>
+  <input type="range" id="jitunennrei" min="-10" max="10" value="0">
+  <div class="slider-print" id="jitunennreiBar">
+    <div class="slider-fill" id="jitunennreiFill"></div>
+  </div>
+
+  <label for="mitamenonennrei">見た目年齢：
+    <span id="mitamenonennreiValue">±0歳</span>
+  </label>
+  <input type="range" id="mitamenonennrei" min="-10" max="10" value="0">
+  <div class="slider-print" id="mitamenonennreiBar">
+    <div class="slider-fill" id="mitamenonennreiFill"></div>
+  </div>
+
+  <button onclick="window.print()" class="no-print">PDFとして保存</button>
+
+  <script>
+    const sliders = ["jitunennrei", "mitamenonennrei"];
+
+    sliders.forEach(id => {
+      const slider = document.getElementById(id);
+      const valueSpan = document.getElementById(id + "Value");
+      const fillBar = document.getElementById(id + "Fill");
+
+      function updateSliderVisual() {
+        const value = parseInt(slider.value, 10);
+        const percentage = ((value + 10) / 20) * 100;
+        valueSpan.textContent = (value > 0 ? "+" : value < 0 ? "−" : "±") + Math.abs(value) + "歳";
+        fillBar.style.width = percentage + "%";
+      }
+
+      slider.addEventListener("input", updateSliderVisual);
+      updateSliderVisual(); // 初期化
+    });
+  </script>
 </body>
 </html>
