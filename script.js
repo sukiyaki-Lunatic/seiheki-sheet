@@ -27,6 +27,7 @@ function downloadPDF() {
       jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
+    
     html2pdf().set(opt).from(element).save().then(() => {
       saveBtn.style.display = "block"; // 元に戻す
     });
