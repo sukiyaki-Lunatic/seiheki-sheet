@@ -1,89 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>スライダーPDF</title>
+  <meta charset="UTF-8" />
+  <title>スライダーPDF（そのまま表示）</title>
   <style>
     body {
       font-family: sans-serif;
       margin: 20px;
     }
-
     label {
       display: block;
       margin-top: 20px;
     }
-
-    .slider-print {
-      display: none;
-      width: 200px;
-      height: 10px;
-      background-color: #ddd;
-      position: relative;
-      border-radius: 5px;
-      margin-top: 5px;
+    span.value {
+      margin-left: 10px;
+      font-family: monospace;
     }
-
-    .slider-fill {
-      height: 100%;
-      background-color: #2196F3;
-      width: 50%;
-      border-radius: 5px;
-    }
-
-    @media print {
-      .no-print {
-        display: none;
-      }
-
-      input[type=range] {
-        display: none;
-      }
-
-      .slider-print {
-        display: block;
-      }
+    button {
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>スライダーをPDFで保存するテスト</h1>
+  <h1>スライダーをPDFにそのまま出力</h1>
 
   <label for="jitunennrei">実年齢：
-    <span id="jitunennreiValue">±0歳</span>
+    <input type="range" id="jitunennrei" min="-10" max="10" value="0" />
+    <span class="value" id="jitunennreiValue">0</span>
   </label>
-  <input type="range" id="jitunennrei" min="-10" max="10" value="0">
-  <div class="slider-print" id="jitunennreiBar">
-    <div class="slider-fill" id="jitunennreiFill"></div>
-  </div>
 
   <label for="mitamenonennrei">見た目年齢：
-    <span id="mitamenonennreiValue">±0歳</span>
+    <input type="range" id="mitamenonennrei" min="-10" max="10" value="0" />
+    <span class="value" id="mitamenonennmeiValue">0</span>
   </label>
-  <input type="range" id="mitamenonennrei" min="-10" max="10" value="0">
-  <div class="slider-print" id="mitamenonennreiBar">
-    <div class="slider-fill" id="mitamenonennreiFill"></div>
-  </div>
 
-  <button onclick="window.print()" class="no-print">PDFとして保存</button>
+  <button id="savePdfBtn">PDFとして保存</button>
 
+  <!-- html2pdf.js ライブラリ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
-    const sliders = ["jitunennrei", "mitamenonennrei"];
+    const sliders = ["jitunennrei", "mitamenonennmei"];
 
     sliders.forEach(id => {
       const slider = document.getElementById(id);
-      const valueSpan = document.getElementById(id + "Value");
-      const fillBar = document.getElementById(id + "Fill");
+      const valSpan = document.getElementById(id + "Value");
 
-      function updateSliderVisual() {
-        const value = parseInt(slider.value, 10);
-        const percentage = ((value + 10) / 20) * 100;
-        valueSpan.textContent = (value > 0 ? "+" : value < 0 ? "−" : "±") + Math.abs(value) + "歳";
-        fillBar.style.width = percentage + "%";
-      }
+      slider.addEventListener("input", () => {
+        valSpan.textContent = slider.value;
+      });
+    });
 
-      slider.addEventListener("input", updateSliderVisual);
-      updateSliderVisual(); // 初期化
+    document.getElementById("savePdfBtn").addEventListener("click", () => {
+      const element = document.body;
+      const opt = {
+        margin: 0.5,
+        filename: "性癖シート.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+      };
+      html2pdf().set(opt).from(element).save();
     });
   </script>
 </body>
