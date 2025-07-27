@@ -3,7 +3,15 @@ body {
   padding: 20px;
   background-color: #f5f5f5;
 }
+
 label {
   display: block;
   margin: 10px 0;
+}
+
+.value {
+  display: inline-block;
+  width: 30px; /* 固定幅 */
+  text-align: right;
+  font-family: monospace; /* 等幅フォント */
 }
