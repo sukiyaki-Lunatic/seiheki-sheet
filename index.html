@@ -2,65 +2,35 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>スライダーPDF（そのまま表示）</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 20px;
-    }
-    span.value {
-      margin-left: 10px;
-      font-family: monospace;
-    }
-    button {
-      margin-top: 30px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>性癖シート</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>スライダーをPDFにそのまま出力</h1>
+  <h1>性癖シート</h1>
 
   <label for="jitunennrei">実年齢：
-    <input type="range" id="jitunennrei" min="-10" max="10" value="0" />
-    <span class="value" id="jitunennreiValue">0</span>
+    <span id="jitunennreiValue">±0歳</span>
   </label>
+  <input type="range" id="jitunennrei" min="-10" max="10" value="0" />
 
-  <label for="mitamenonennrei">見た目年齢：
-    <input type="range" id="mitamenonennrei" min="-10" max="10" value="0" />
-    <span class="value" id="mitamenonennmeiValue">0</span>
+  <div class="slider-print" id="jitunennreiBar">
+    <div class="slider-fill" id="jitunennreiFill"></div>
+  </div>
+
+  <label for="mitamenonennrei">見た目の年齢：
+    <span id="mitamenonennreiValue">±0歳</span>
   </label>
+  <input type="range" id="mitamenonennrei" min="-10" max="10" value="0" />
 
-  <button id="savePdfBtn">PDFとして保存</button>
+  <div class="slider-print" id="mitamenonennreiBar">
+    <div class="slider-fill" id="mitamenonennreiFill"></div>
+  </div>
 
-  <!-- html2pdf.js ライブラリ -->
+  <button id="downloadBtn">PDFとして保存</button>
+
+  <!-- html2pdfライブラリ読み込み -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script>
-    const sliders = ["jitunennrei", "mitamenonennmei"];
-
-    sliders.forEach(id => {
-      const slider = document.getElementById(id);
-      const valSpan = document.getElementById(id + "Value");
-
-      slider.addEventListener("input", () => {
-        valSpan.textContent = slider.value;
-      });
-    });
-
-    document.getElementById("savePdfBtn").addEventListener("click", () => {
-      const element = document.body;
-      const opt = {
-        margin: 0.5,
-        filename: "性癖シート.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
-      };
-      html2pdf().set(opt).from(element).save();
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
