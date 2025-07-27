@@ -2,34 +2,30 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>性癖シート</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>性癖シート</h1>
+  <form id="seihekiForm">
+    <div class="slider-item">
+      <label for="jitunennrei">実年齢:</label>
+      <input type="range" min="-10" max="10" value="0" id="jitunennrei" />
+      <span class="value-display" id="jitunennreiValue">0</span>
+    </div>
 
-  <label for="jitunennrei">実年齢：
-    <span id="jitunennreiValue">±0</span>
-  </label>
-  <input type="range" id="jitunennrei" min="-10" max="10" value="0" />
+    <div class="slider-item">
+      <label for="mitamenonennrei">見た目の年齢:</label>
+      <input type="range" min="-10" max="10" value="0" id="mitamenonennrei" />
+      <span class="value-display" id="mitamenonennreiValue">0</span>
+    </div>
 
-  <div class="slider-print" id="jitunennreiBar">
-    <div class="slider-fill" id="jitunennreiFill"></div>
-  </div>
+    <!-- 他の項目を追加したい場合はここにコピーして追加 -->
 
-  <label for="mitamenonennrei">見た目の年齢：
-    <span id="mitamenonennreiValue">±0</span>
-  </label>
-  <input type="range" id="mitamenonennrei" min="-10" max="10" value="0" />
+    <button id="saveBtn" type="button" onclick="downloadPDF()">PDFとして保存</button>
+  </form>
 
-  <div class="slider-print" id="mitamenonennreiBar">
-    <div class="slider-fill" id="mitamenonennreiFill"></div>
-  </div>
-
-  <button id="downloadBtn">PDFとして保存</button>
-
-  <!-- html2pdfライブラリ読み込み -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
