@@ -75,3 +75,19 @@ button:hover {
     margin-top: 5px;
   }
 }
+
+.pdf-bar {
+  height: 8px;
+  background-color: #ddd;
+  border-radius: 4px;
+  margin: 5px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-bar-fill {
+  height: 100%;
+  background-color: #2196f3;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
