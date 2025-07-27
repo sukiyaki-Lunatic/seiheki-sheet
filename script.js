@@ -6,7 +6,14 @@ sliders.forEach(id => {
   });
 });
 
-
 function downloadPDF() {
-  alert("PDF出力機能はまだ実装されていません（html2pdf.jsなどを使って実装可能）");
+  const element = document.getElementById("seihekiForm");
+  const opt = {
+    margin:       0.5,
+    filename:     '性癖シート.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(element).save();
 }
