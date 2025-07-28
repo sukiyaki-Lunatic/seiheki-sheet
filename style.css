@@ -6,7 +6,6 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 form {
@@ -31,7 +30,11 @@ label {
 input[type="range"] {
   flex: 1;
   margin: 0 10px;
-  accent-color: #2196f3;
+}
+
+.noui-slider {
+  flex: 1;
+  margin: 0 10px;
 }
 
 .value-display {
@@ -41,7 +44,7 @@ input[type="range"] {
 
 button {
   display: block;
-  margin: 30px auto 20px;
+  margin: 30px auto 0;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #2196f3;
@@ -53,68 +56,4 @@ button {
 
 button:hover {
   background-color: #1976d2;
-}
-
-/* PDF用バー */
-.pdf-bar {
-  height: 8px;
-  background-color: #ddd;
-  border-radius: 4px;
-  margin: 5px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.pdf-bar-fill {
-  height: 100%;
-  background-color: #2196f3;
-  border-radius: 4px;
-  transition: width 0.3s ease;
-}
-
-/* モバイル対応 */
-@media (max-width: 480px) {
-  .slider-item {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  label {
-    width: 100%;
-    margin-bottom: 5px;
-  }
-
-  input[type="range"],
-  #ageRangeSlider {
-    margin: 0;
-  }
-
-  .value-display {
-    margin-top: 5px;
-  }
-}
-
-.noui-slider {
-  flex: 1;
-  margin: 0 10px;
-  max-width: 400px;
-}
-
-.noUi-target {
-  background: #ddd;
-  border-radius: 10px;
-  border: none;
-  box-shadow: none;
-  height: 10px;
-}
-
-.noUi-horizontal .noUi-handle {
-  width: 20px;
-  height: 20px;
-  top: -6px;
-  background: #2196f3;
-  border-radius: 50%;
-  border: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
 }
