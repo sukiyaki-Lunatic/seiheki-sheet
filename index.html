@@ -6,6 +6,7 @@
   <title>性癖シート</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css" rel="stylesheet">
 </head>
 <body>
   <div id="sheetWrapper">
@@ -28,6 +29,12 @@
         <label for="ageRangeSlider">年齢（範囲）:</label>
         <div id="ageRangeSlider" style="flex: 1; margin: 0 10px;"></div>
         <span class="value-display" id="ageRangeValue">2〜5</span>
+      </div>
+
+      <div class="slider-item">
+        <label for="ageSlider">年齢:</label>
+        <div id="ageSlider" class="noui-slider"></div>
+        <span class="value-display" id="ageRangeValue">2 ~ 5</span>
       </div>
 
       <button type="button" id="saveBtn" onclick="downloadPDF()">PDFとして保存</button>
