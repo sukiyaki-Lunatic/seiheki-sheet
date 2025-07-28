@@ -13,11 +13,33 @@ sliders.forEach(id => {
   });
 });
 
+// 年齢範囲スライダー (noUiSlider)
+const ageRangeSlider = document.getElementById('ageRangeSlider');
+const ageRangeValue = document.getElementById('ageRangeValue');
+
+noUiSlider.create(ageRangeSlider, {
+  start: [2, 5],
+  connect: true,
+  range: {
+    min: 0,
+    max: 10
+  },
+  step: 1,
+  format: {
+    to: value => Math.round(value),
+    from: value => Number(value)
+  }
+});
+
+ageRangeSlider.noUiSlider.on('update', (values) => {
+  ageRangeValue.textContent = `${values[0]}〜${values[1]}`;
+});
+
 function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
   saveBtn.style.display = "none";
 
-  // スライダーをバーに変換（PDF用）
+  // 実年齢・見た目年齢 → バーに変換
   sliders.forEach(id => {
     const slider = document.getElementById(id);
     const bar = document.createElement("div");
