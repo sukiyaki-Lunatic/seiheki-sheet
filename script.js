@@ -77,3 +77,27 @@ function downloadPDF() {
     });
   }, 100);
 }
+
+// 既存のスライダー表示処理（そのまま）
+
+// 年齢スライダーのnoUiSlider設定
+const ageSlider = document.getElementById('ageSlider');
+noUiSlider.create(ageSlider, {
+  start: [2, 5],
+  connect: true,
+  range: {
+    min: -10,
+    max: 10
+  },
+  step: 1,
+  tooltips: [true, true],
+  format: {
+    to: value => Math.round(value),
+    from: value => Number(value)
+  }
+});
+
+const ageRangeValue = document.getElementById('ageRangeValue');
+ageSlider.noUiSlider.on('update', function (values) {
+  ageRangeValue.textContent = `${values[0]} ~ ${values[1]}`;
+});
