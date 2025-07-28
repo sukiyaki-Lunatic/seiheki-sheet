@@ -1,5 +1,5 @@
-// 通常のスライダー
 const sliders = ["jitunennrei", "mitamenonennrei"];
+
 sliders.forEach(id => {
   const slider = document.getElementById(id);
   const valueSpan = document.getElementById(id + "Value");
@@ -8,32 +8,30 @@ sliders.forEach(id => {
   });
 });
 
-// noUiSlider 年齢範囲スライダー
+// noUiSlider 年齢スライダー
 const ageSlider = document.getElementById('ageSlider');
 noUiSlider.create(ageSlider, {
   start: [2, 5],
   connect: true,
-  range: {
-    'min': -10,
-    'max': 10
-  },
   step: 1,
-  tooltips: [true, true],
+  range: {
+    'min': 0,
+    'max': 100
+  },
   format: {
     to: value => Math.round(value),
     from: value => Number(value)
   }
 });
 
-const ageRangeDisplay = document.getElementById("ageRangeDisplay");
+const ageRangeValue = document.getElementById('ageRangeValue');
 ageSlider.noUiSlider.on('update', (values) => {
-  ageRangeDisplay.textContent = `${values[0]}〜${values[1]}`;
+  ageRangeValue.textContent = `${values[0]} ~ ${values[1]}`;
 });
 
-// PDF出力
 function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
-  saveBtn.style.display = "none"; // ボタンを非表示
+  saveBtn.style.display = "none";
 
   setTimeout(() => {
     const element = document.getElementById("seihekiForm");
