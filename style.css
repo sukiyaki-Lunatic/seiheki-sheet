@@ -27,11 +27,6 @@ label {
   width: 150px;
 }
 
-input[type="range"] {
-  flex: 1;
-  margin: 0 10px;
-}
-
 .noui-wrapper {
   flex: 1;
   margin: 0 10px;
@@ -78,7 +73,6 @@ button:hover {
   top: -7px;
 }
 
-/* ツールチップの非表示 */
 .noUi-tooltip {
-  display: none;
+  display: none !important;
 }
