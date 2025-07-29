@@ -1,41 +1,54 @@
-const sliders = ["jitunennrei", "mitamenonennrei"];
+// 単一値スライダー生成
+function createSingleSlider(id, label, min, max, step, initial) {
+  const wrapper = document.getElementById(id + "-wrapper");
+  wrapper.innerHTML = `
+    <label for="${id}">${label}</label>
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${initial}">
+    <span class="value-display" id="${id}Value">${initial}</span>
+  `;
 
-sliders.forEach(id => {
   const slider = document.getElementById(id);
   const valueSpan = document.getElementById(id + "Value");
   slider.addEventListener("input", () => {
     valueSpan.textContent = slider.value;
   });
-});
+}
 
-// 範囲スライダー追加関数
-function createRangeSlider(id, start, min, max, step = 1) {
-  const element = document.getElementById(id);
-  noUiSlider.create(element, {
-    start: start,
+// 範囲スライダー生成（noUiSlider）
+function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
+  const wrapper = document.getElementById(id + "-wrapper");
+  wrapper.innerHTML = `
+    <label for="${id}">${label}</label>
+    <div class="noui-wrapper" id="${id}"></div>
+    <span class="value-display" id="${id}Value"></span>
+  `;
+
+  const slider = document.getElementById(id);
+  noUiSlider.create(slider, {
+    start: [startLow, startHigh],
     connect: true,
-    range: { min: min, max: max },
+    range: {
+      min: min,
+      max: max
+    },
     step: step,
-    tooltips: false, // ツールチップを無効
+    tooltips: [false, false],
     format: {
       to: value => Math.round(value),
       from: value => Number(value)
     }
   });
-  return element;
+
+  const valueSpan = document.getElementById(id + "Value");
+  slider.noUiSlider.on("update", (values) => {
+    valueSpan.textContent = `${values[0]} ~ ${values[1]}`;
+  });
 }
 
-// 年齢範囲スライダー初期化
-const nennreiSlider = createRangeSlider("nennrei", [2, 5], 0, 100);
-const nennreiValue = document.getElementById("nennreiValue");
-nennreiSlider.noUiSlider.on("update", (values) => {
-  nennreiValue.textContent = `${values[0]} ~ ${values[1]}`;
-});
-
-// PDF出力
+// PDF保存
 function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
-  saveBtn.style.display = "none"; // ボタンを一時非表示
+  saveBtn.style.display = "none";
 
   setTimeout(() => {
     const element = document.getElementById("seihekiForm");
@@ -48,7 +61,14 @@ function downloadPDF() {
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
-      saveBtn.style.display = "block"; // 復元
+      saveBtn.style.display = "block";
     });
   }, 200);
 }
+
+// 初期スライダー作成
+window.addEventListener("load", () => {
+  createSingleSlider("jitunennrei", "実年齢", 0, 100, 1, 25);
+  createSingleSlider("mitamenonennrei", "見た目年齢", 0, 100, 1, 20);
+  createRangeSlider("nennrei", "好みの年齢範囲", 0, 100, 1, 2, 5);
+});
