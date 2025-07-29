@@ -3,6 +3,10 @@ const sliders = ["jitunennrei", "mitamenonennrei"];
 sliders.forEach(id => {
   const slider = document.getElementById(id);
   const valueSpan = document.getElementById(id + "Value");
+
+  // 初期表示反映
+  valueSpan.textContent = slider.value;
+
   slider.addEventListener("input", () => {
     valueSpan.textContent = slider.value;
   });
@@ -41,12 +45,16 @@ function downloadPDF() {
       margin: 0.5,
       filename: 'seiheki_sheet.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        logging: false
+      },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
       saveBtn.style.display = "block"; // 復元
     });
-  }, 200);
+  }, 300); // 少し長めに
 }
