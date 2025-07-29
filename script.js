@@ -11,7 +11,7 @@ function createSingleSlider(id, min = -10, max = 10, start = 0) {
       max: max
     },
     step: 1,
-    tooltips: true,
+    tooltips: false,
     format: {
       to: value => Math.round(value),
       from: value => Number(value)
@@ -37,7 +37,7 @@ noUiSlider.create(nennreiSlider, {
     max: 100
   },
   step: 1,
-  tooltips: [true, true],
+  tooltips: [false, true],
   format: {
     to: value => Math.round(value),
     from: value => Number(value)
