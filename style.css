@@ -1,3 +1,4 @@
+/* 全体共通 */
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -30,6 +31,33 @@ label {
 input[type="range"] {
   flex: 1;
   margin: 0 10px;
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: #ddd;
+  outline: none;
+}
+
+/* ハンドル */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 2px solid #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 2px solid #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .noui-wrapper {
@@ -58,7 +86,7 @@ button:hover {
   background-color: #1976d2;
 }
 
-/* PDF対応: スライダーのバーも正しく表示 */
+/* noUiSlider 統一デザイン */
 .noUi-target {
   background: #ddd;
   border-radius: 10px;
