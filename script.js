@@ -72,3 +72,4 @@ window.addEventListener("load", () => {
   createSingleSlider("mitamenonennrei", "見た目年齢", 0, 100, 1, 20);
   createRangeSlider("nennrei", "好みの年齢範囲", 0, 100, 1, 2, 5);
 });
+
