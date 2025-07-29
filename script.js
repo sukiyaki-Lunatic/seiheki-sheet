@@ -37,7 +37,7 @@ noUiSlider.create(nennreiSlider, {
     max: 100
   },
   step: 1,
-  tooltips: [false, true],
+  tooltips: false,
   format: {
     to: value => Math.round(value),
     from: value => Number(value)
