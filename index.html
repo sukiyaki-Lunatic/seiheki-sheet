@@ -2,37 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>性癖シート</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>性癖シート</h1>
-  <form id="seihekiForm">
-    <div class="slider-item">
-      <label for="jitunennrei">実年齢:</label>
-      <div id="jitunennrei" class="noui-wrapper"></div>
-      <span class="value-display" id="jitunennreiValue">0</span>
-    </div>
+  <div class="container">
+    <h1>性癖シート</h1>
+    <form id="preference-form">
+      <!-- スライダーは script.js で自動生成 -->
+      <button type="submit">送信</button>
+    </form>
+  </div>
 
-    <div class="slider-item">
-      <label for="mitamenonennrei">見た目の年齢:</label>
-      <div id="mitamenonennrei" class="noui-wrapper"></div>
-      <span class="value-display" id="mitamenonennreiValue">0</span>
-    </div>
-
-    <div class="slider-item">
-      <label for="nennrei">年齢(範囲):</label>
-      <div id="nennrei" class="noui-wrapper"></div>
-      <span class="value-display" id="nennreiValue">2 ~ 5</span>
-    </div>
-
-    <button type="button" id="saveBtn" onclick="downloadPDF()">PDFとして保存</button>
-  </form>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
