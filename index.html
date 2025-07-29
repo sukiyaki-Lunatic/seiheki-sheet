@@ -2,30 +2,30 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>性癖シート</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css" />
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"/>
 </head>
 <body>
   <h1>性癖シート</h1>
   <form id="seihekiForm">
     <div class="slider-item">
       <label for="jitunennrei">実年齢:</label>
-      <input type="range" min="-10" max="10" value="0" id="jitunennrei" />
+      <input type="range" min="-10" max="10" value="0" id="jitunennrei"/>
       <span class="value-display" id="jitunennreiValue">0</span>
     </div>
 
     <div class="slider-item">
       <label for="mitamenonennrei">見た目の年齢:</label>
-      <input type="range" min="-10" max="10" value="0" id="mitamenonennrei" />
+      <input type="range" min="-10" max="10" value="0" id="mitamenonennrei"/>
       <span class="value-display" id="mitamenonennreiValue">0</span>
     </div>
 
     <div class="slider-item">
-      <label for="ageRange">年齢:</label>
-      <div id="ageSlider" class="noui-slider"></div>
-      <span class="value-display" id="ageRangeValue">2 ~ 5</span>
+      <label for="nennrei">年齢(範囲):</label>
+      <div id="nennrei" class="noui-wrapper"></div>
+      <span class="value-display" id="nennreiValue">2 ~ 5</span>
     </div>
 
     <button type="button" id="saveBtn" onclick="downloadPDF()">PDFとして保存</button>
@@ -36,4 +36,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
