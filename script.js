@@ -60,10 +60,14 @@ function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
   });
 }
 
-// PDF保存
-function downloadPDF() {
+// PDF保存function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
   saveBtn.style.display = "none";
+
+  // ハンドルを非表示にする
+  document.querySelectorAll('.noUi-handle').forEach(handle => {
+    handle.style.visibility = 'hidden';
+  });
 
   setTimeout(() => {
     const element = document.getElementById("pdfArea");
@@ -76,6 +80,10 @@ function downloadPDF() {
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
+      // PDF保存後にハンドルを再表示
+      document.querySelectorAll('.noUi-handle').forEach(handle => {
+        handle.style.visibility = 'visible';
+      });
       saveBtn.style.display = "block";
     });
   }, 200);
