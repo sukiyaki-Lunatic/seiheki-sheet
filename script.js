@@ -27,3 +27,4 @@ function createSingleSlider(id, label, min, max, step, initial) {
     valueSpan.textContent = values[0];
   });
 }
+
