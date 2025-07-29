@@ -61,12 +61,15 @@ function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
 }
 
 // PDF保存function downloadPDF() {
+function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
   saveBtn.style.display = "none";
 
-  // ハンドルを非表示にする
-  document.querySelectorAll('.noUi-handle').forEach(handle => {
-    handle.style.visibility = 'hidden';
+  // つまみ（ハンドル）を非表示にする（位置やサイズは保ったまま）
+  const handles = document.querySelectorAll('.noUi-handle');
+  handles.forEach(handle => {
+    handle.style.opacity = '0';            // 見えなくする
+    handle.style.pointerEvents = 'none';   // 操作不能にする（念のため）
   });
 
   setTimeout(() => {
@@ -80,14 +83,16 @@ function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
-      // PDF保存後にハンドルを再表示
-      document.querySelectorAll('.noUi-handle').forEach(handle => {
-        handle.style.visibility = 'visible';
+      // 保存後にハンドルを再表示
+      handles.forEach(handle => {
+        handle.style.opacity = '1';
+        handle.style.pointerEvents = 'auto';
       });
       saveBtn.style.display = "block";
     });
   }, 200);
 }
+
 
 // 初期化
 window.addEventListener("load", () => {
