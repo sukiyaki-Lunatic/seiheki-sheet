@@ -1,70 +1,81 @@
-// 共通スライダー作成関数（単一値）
-function createSingleSlider(id, min = -10, max = 10, start = 0) {
-  const target = document.getElementById(id);
-  const valueSpan = document.getElementById(id + "Value");
+window.addEventListener("load", () => {
+  const form = document.getElementById("preference-form");
 
-  noUiSlider.create(target, {
-    start: start,
-    connect: [true, false],
-    range: {
-      min: min,
-      max: max
-    },
-    step: 1,
-    tooltips: false,
-    format: {
-      to: value => Math.round(value),
-      from: value => Number(value)
-    }
-  });
+  // 単一スライダー追加関数
+  function createSingleSlider(labelText, min, max, initialValue) {
+    const container = document.createElement("div");
+    container.className = "slider-item";
 
-  target.noUiSlider.on("update", (values) => {
-    valueSpan.textContent = values[0];
-  });
-}
+    const label = document.createElement("label");
+    label.textContent = labelText;
 
-// 実年齢・見た目の年齢スライダー作成
-createSingleSlider("jitunennrei", -10, 10, 0);
-createSingleSlider("mitamenonennrei", -10, 10, 0);
+    const slider = document.createElement("div");
+    slider.className = "noui-wrapper";
 
-// 年齢範囲スライダー
-const nennreiSlider = document.getElementById("nennrei");
-noUiSlider.create(nennreiSlider, {
-  start: [2, 5],
-  connect: true,
-  range: {
-    min: 0,
-    max: 100
-  },
-  step: 1,
-  tooltips: false,
-  format: {
-    to: value => Math.round(value),
-    from: value => Number(value)
-  }
-});
-const nennreiValue = document.getElementById("nennreiValue");
-nennreiSlider.noUiSlider.on("update", (values) => {
-  nennreiValue.textContent = `${values[0]} ~ ${values[1]}`;
-});
+    const valueDisplay = document.createElement("span");
+    valueDisplay.className = "value-display";
+    valueDisplay.textContent = initialValue;
 
-// PDF保存処理
-function downloadPDF() {
-  const saveBtn = document.getElementById("saveBtn");
-  saveBtn.style.display = "none"; // 一時非表示
+    container.appendChild(label);
+    container.appendChild(slider);
+    container.appendChild(valueDisplay);
+    form.insertBefore(container, form.querySelector("button"));
 
-  setTimeout(() => {
-    const element = document.getElementById("seihekiForm");
-    const opt = {
-      margin: 0.5,
-      filename: 'seiheki_sheet.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(element).save().then(() => {
-      saveBtn.style.display = "block"; // 復元
+    noUiSlider.create(slider, {
+      start: initialValue,
+      connect: [true, false],
+      range: {
+        min: min,
+        max: max,
+      },
+      step: 1,
+      tooltips: false, // ← 数字非表示
     });
-  }, 300);
-}
+
+    slider.noUiSlider.on("update", (values) => {
+      valueDisplay.textContent = Math.round(values[0]);
+    });
+  }
+
+  // 範囲スライダー追加関数（new!）
+  function createRangeSlider(labelText, min, max, initialMin, initialMax) {
+    const container = document.createElement("div");
+    container.className = "slider-item";
+
+    const label = document.createElement("label");
+    label.textContent = labelText;
+
+    const slider = document.createElement("div");
+    slider.className = "noui-wrapper";
+
+    const valueDisplay = document.createElement("span");
+    valueDisplay.className = "value-display";
+    valueDisplay.textContent = `${initialMin} - ${initialMax}`;
+
+    container.appendChild(label);
+    container.appendChild(slider);
+    container.appendChild(valueDisplay);
+    form.insertBefore(container, form.querySelector("button"));
+
+    noUiSlider.create(slider, {
+      start: [initialMin, initialMax],
+      connect: true,
+      range: {
+        min: min,
+        max: max,
+      },
+      step: 1,
+      tooltips: false, // ← 数字非表示
+    });
+
+    slider.noUiSlider.on("update", (values) => {
+      const [low, high] = values.map((v) => Math.round(v));
+      valueDisplay.textContent = `${low} - ${high}`;
+    });
+  }
+
+  // 実行例
+  createSingleSlider("実年齢", 0, 100, 25);
+  createSingleSlider("見た目年齢", 0, 100, 25);
+  createRangeSlider("年齢の好み", 18, 60, 20, 30); // ← 範囲スライダーの追加例
+});
