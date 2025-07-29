@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
         max: max,
       },
       step: 1,
-      tooltips: false, // ← 数字非表示
+      tooltips: false,
     });
 
     slider.noUiSlider.on("update", (values) => {
@@ -37,7 +37,7 @@ window.addEventListener("load", () => {
     });
   }
 
-  // 範囲スライダー追加関数（new!）
+  // 範囲スライダー追加関数
   function createRangeSlider(labelText, min, max, initialMin, initialMax) {
     const container = document.createElement("div");
     container.className = "slider-item";
@@ -65,7 +65,7 @@ window.addEventListener("load", () => {
         max: max,
       },
       step: 1,
-      tooltips: false, // ← 数字非表示
+      tooltips: false,
     });
 
     slider.noUiSlider.on("update", (values) => {
@@ -74,8 +74,9 @@ window.addEventListener("load", () => {
     });
   }
 
-  // 実行例
+  // ▼ ここでスライダーを追加 ▼
   createSingleSlider("実年齢", 0, 100, 25);
   createSingleSlider("見た目年齢", 0, 100, 25);
-  createRangeSlider("年齢の好み", 18, 60, 20, 30); // ← 範囲スライダーの追加例
+  createRangeSlider("好みの年齢範囲", 10, 60, 18, 30);
+  createRangeSlider("理想身長", 140, 200, 160, 170);
 });
