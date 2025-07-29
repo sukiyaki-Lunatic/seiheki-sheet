@@ -9,11 +9,13 @@
 </head>
 <body>
   <h1>性癖シート</h1>
-  <form id="seihekiForm">
-    <div class="slider-item" id="jitunennrei-wrapper"></div>
-    <div class="slider-item" id="mitamenonennrei-wrapper"></div>
-    <div class="slider-item" id="nennrei-wrapper"></div>
-  </form>
+  <div id="pdfArea">
+    <form id="seihekiForm">
+      <div class="slider-item" id="jitunennrei-wrapper"></div>
+      <div class="slider-item" id="mitamenonennrei-wrapper"></div>
+      <div class="slider-item" id="nennrei-wrapper"></div>
+    </form>
+  </div>
   <button id="saveBtn" onclick="downloadPDF()">PDFとして保存</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
@@ -21,4 +23,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
