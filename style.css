@@ -1,40 +1,84 @@
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: #f2f2f2;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .slider-item {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
 
-.slider-item label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  font-size: 16px;
+label {
+  width: 150px;
+}
+
+input[type="range"] {
+  flex: 1;
+  margin: 0 10px;
 }
 
 .noui-wrapper {
-  margin-bottom: 6px;
+  flex: 1;
+  margin: 0 10px;
 }
 
 .value-display {
-  font-size: 14px;
-  color: #444;
-  display: inline-block;
+  width: 80px;
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: 30px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1976d2;
+}
+
+.noUi-target {
+  background: #ddd;
+  border-radius: 10px;
+  height: 8px;
+}
+
+.noUi-connect {
+  background: #2196f3;
+}
+
+.noUi-handle {
+  background: white;
+  border: 2px solid #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  top: -7px;
+}
+
+/* ツールチップの非表示 */
+.noUi-tooltip {
+  display: none;
 }
