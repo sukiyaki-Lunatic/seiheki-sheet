@@ -32,7 +32,7 @@ input[type="range"] {
   margin: 0 10px;
 }
 
-.noui-slider {
+.noui-wrapper {
   flex: 1;
   margin: 0 10px;
 }
@@ -58,3 +58,23 @@ button:hover {
   background-color: #1976d2;
 }
 
+/* PDF対応: スライダーのバーも正しく表示 */
+.noUi-target {
+  background: #ddd;
+  border-radius: 10px;
+  height: 8px;
+}
+
+.noUi-connect {
+  background: #2196f3;
+}
+
+.noUi-handle {
+  background: white;
+  border: 2px solid #2196f3;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  top: -7px;
+}
