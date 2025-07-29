@@ -25,6 +25,7 @@ form {
 
 label {
   width: 150px;
+  font-weight: bold;
 }
 
 .noui-wrapper {
@@ -35,6 +36,7 @@ label {
 .value-display {
   width: 80px;
   text-align: center;
+  font-size: 14px;
 }
 
 button {
@@ -53,6 +55,7 @@ button:hover {
   background-color: #1976d2;
 }
 
+/* noUiSlider 見た目統一 */
 .noUi-target {
   background: #ddd;
   border-radius: 10px;
