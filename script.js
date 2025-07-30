@@ -1,4 +1,3 @@
-// 単一スライダー（noUiSliderで統一）
 function createSingleSlider(id, label, min, max, step, initial) {
   const wrapper = document.getElementById(id + "-wrapper");
   wrapper.innerHTML = `
@@ -11,11 +10,8 @@ function createSingleSlider(id, label, min, max, step, initial) {
   noUiSlider.create(slider, {
     start: [initial],
     connect: [true, false],
-    range: {
-      min: min,
-      max: max
-    },
-    step: step,
+    range: { min, max },
+    step,
     tooltips: false,
     format: {
       to: value => Math.round(value),
@@ -29,7 +25,6 @@ function createSingleSlider(id, label, min, max, step, initial) {
   });
 }
 
-// 範囲スライダー（noUiSlider）
 function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
   const wrapper = document.getElementById(id + "-wrapper");
   wrapper.innerHTML = `
@@ -42,11 +37,8 @@ function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
   noUiSlider.create(slider, {
     start: [startLow, startHigh],
     connect: true,
-    range: {
-      min: min,
-      max: max
-    },
-    step: step,
+    range: { min, max },
+    step,
     tooltips: false,
     format: {
       to: value => Math.round(value),
@@ -60,16 +52,14 @@ function createRangeSlider(id, label, min, max, step, startLow, startHigh) {
   });
 }
 
-// PDF保存function downloadPDF() {
 function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
   saveBtn.style.display = "none";
 
-  // つまみ（ハンドル）を非表示にする（位置やサイズは保ったまま）
   const handles = document.querySelectorAll('.noUi-handle');
   handles.forEach(handle => {
-    handle.style.opacity = '0';            // 見えなくする
-    handle.style.pointerEvents = 'none';   // 操作不能にする（念のため）
+    handle.style.opacity = '0';
+    handle.style.pointerEvents = 'none';
   });
 
   setTimeout(() => {
@@ -83,7 +73,6 @@ function downloadPDF() {
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
-      // 保存後にハンドルを再表示
       handles.forEach(handle => {
         handle.style.opacity = '1';
         handle.style.pointerEvents = 'auto';
@@ -93,8 +82,6 @@ function downloadPDF() {
   }, 200);
 }
 
-
-// 初期化
 window.addEventListener("load", () => {
   createSingleSlider("jitunennrei", "実年齢", 0, 100, 1, 25);
   createSingleSlider("mitamenonennrei", "見た目年齢", 0, 100, 1, 20);
