@@ -56,10 +56,28 @@ function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
   saveBtn.style.display = "none";
 
+  // スライダーのハンドルを非表示
   const handles = document.querySelectorAll('.noUi-handle');
   handles.forEach(handle => {
     handle.style.opacity = '0';
     handle.style.pointerEvents = 'none';
+  });
+
+  // 名前入力欄の見た目を下線だけに変更
+  const textInputs = document.querySelectorAll('.text-input');
+  const originalStyles = [];
+  textInputs.forEach(input => {
+    originalStyles.push({
+      element: input,
+      style: input.getAttribute("style") // 元のインラインスタイルを保存
+    });
+
+    input.style.border = "none";
+    input.style.borderBottom = "1px solid #000";
+    input.style.borderRadius = "0";
+    input.style.paddingLeft = "0";
+    input.style.paddingRight = "0";
+    input.style.background = "transparent";
   });
 
   setTimeout(() => {
@@ -73,10 +91,21 @@ function downloadPDF() {
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
+      // スライダーハンドル復元
       handles.forEach(handle => {
         handle.style.opacity = '1';
         handle.style.pointerEvents = 'auto';
       });
+
+      // 名前入力欄のスタイルを元に戻す
+      originalStyles.forEach(({ element, style }) => {
+        if (style !== null) {
+          element.setAttribute("style", style);
+        } else {
+          element.removeAttribute("style");
+        }
+      });
+
       saveBtn.style.display = "block";
     });
   }, 200);
