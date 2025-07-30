@@ -56,20 +56,20 @@ function downloadPDF() {
   const saveBtn = document.getElementById("saveBtn");
   saveBtn.style.display = "none";
 
-  // スライダーのハンドルを非表示
+  // スライダーハンドルを非表示
   const handles = document.querySelectorAll('.noUi-handle');
   handles.forEach(handle => {
     handle.style.opacity = '0';
     handle.style.pointerEvents = 'none';
   });
 
-  // 名前入力欄の見た目を下線だけに変更
+  // 名前欄のスタイルをPDF用に変更
   const textInputs = document.querySelectorAll('.text-input');
   const originalStyles = [];
   textInputs.forEach(input => {
     originalStyles.push({
       element: input,
-      style: input.getAttribute("style") // 元のインラインスタイルを保存
+      style: input.getAttribute("style")
     });
 
     input.style.border = "none";
@@ -91,13 +91,13 @@ function downloadPDF() {
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
-      // スライダーハンドル復元
+      // ハンドル復元
       handles.forEach(handle => {
         handle.style.opacity = '1';
         handle.style.pointerEvents = 'auto';
       });
 
-      // 名前入力欄のスタイルを元に戻す
+      // 名前欄のスタイル復元
       originalStyles.forEach(({ element, style }) => {
         if (style !== null) {
           element.setAttribute("style", style);
