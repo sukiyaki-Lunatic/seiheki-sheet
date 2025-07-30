@@ -39,6 +39,14 @@ label {
   font-size: 14px;
 }
 
+.text-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
 button {
   display: block;
   margin: 30px auto 0;
@@ -80,31 +88,9 @@ button:hover {
   display: none !important;
 }
 
-/* PDF保存時に非表示にするボタン等 */
+/* PDF出力時の非表示用 */
 @media print {
   .pdf-ignore {
     display: none !important;
   }
 }
-
-/* 通常の入力欄 */
-.text-input {
-  flex: 1;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-/* PDF保存・印刷時に見た目を変える */
-@media print {
-  .text-input {
-    border: none !important;
-    border-bottom: 1px solid #000 !important;
-    border-radius: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    background: transparent !important;
-  }
-}
-
