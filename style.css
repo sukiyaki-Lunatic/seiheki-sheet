@@ -55,7 +55,6 @@ button:hover {
   background-color: #1976d2;
 }
 
-/* noUiSlider 見た目統一 */
 .noUi-target {
   background: #ddd;
   border-radius: 10px;
@@ -74,8 +73,16 @@ button:hover {
   width: 20px;
   height: 20px;
   top: -7px;
+  box-shadow: none;
 }
 
 .noUi-tooltip {
   display: none !important;
+}
+
+/* PDF保存時に非表示にするボタン等 */
+@media print {
+  .pdf-ignore {
+    display: none !important;
+  }
 }
