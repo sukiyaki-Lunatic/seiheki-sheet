@@ -86,3 +86,11 @@ button:hover {
     display: none !important;
   }
 }
+
+.text-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
