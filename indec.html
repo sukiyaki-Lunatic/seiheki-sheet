@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性癖シート</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+      body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        user-select: none;
+      }
+      #pdf-content {
+        background: #ffffff;
+        width: 100%;
+        max-width: 600px;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+      }
+      h1 {
+        text-align: center;
+        color: #4a5568;
+        margin-bottom: 30px;
+        font-size: 24px;
+        letter-spacing: 1px;
+      }
+      .profile-group {
+        margin-bottom: 25px;
+      }
+      .profile-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #4a5568;
+      }
+      .profile-group input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e0;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 16px;
+        background-color: #fafbfc;
+      }
+      .slider-group {
+        margin-bottom: 35px;
+        break-inside: avoid;
+      }
+      .slider-label {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #4a5568;
+      }
+      .custom-slider-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .slider-track-wrapper {
+        flex-grow: 1;
+        position: relative;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        background-color: #cbd5e0;
+        border-radius: 5px;
+        touch-action: none;
+      }
+      .slider-range-track {
+        position: absolute;
+        height: 100%;
+        background-color: #667eea;
+        border-radius: 5px;
+      }
+      .slider-thumb {
+        width: 24px;
+        height: 24px;
+        background-color: #4c51bf;
+        border-radius: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        cursor: grab;
+        z-index: 2;
+      }
+      .slider-thumb:active {
+        cursor: grabbing;
+        background-color: #3b3f9a;
+      }
+      .hide-thumbs .slider-thumb {
+        width: 12px;
+        height: 12px;
+      }
+      .slider-value {
+        font-size: 18px;
+        font-weight: bold;
+        color: #667eea;
+        width: 65px;
+        text-align: right;
+        white-space: nowrap;
+      }
+      .other-seiheki-group {
+        margin-bottom: 0px;
+      }
+      .other-seiheki-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #4a5568;
+      }
+      .other-seiheki-group textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        border: 1px solid #cbd5e0;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 16px;
+        background-color: #fafbfc;
+        resize: none;
+        overflow: hidden;
+      }
+      .btn-container {
+        text-align: center;
+        margin-top: 25px;
+        width: 100%;
+        max-width: 600px;
+      }
+      .download-btn {
+        background-color: #48bb78;
+        color: white;
+        border: none;
+        padding: 14px 40px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+      .download-btn:hover {
+        background-color: #38a169;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pdf-content">
+      <h1>性癖シート</h1>
+
+      <div class="profile-group">
+        <label for="name">名前</label>
+        <input type="text" id="name" placeholder="ななし">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span>性癖1</span></div>
+        <div class="custom-slider-container">
+          小？
+          <div class="slider-track-wrapper" data-min="2" data-max="5" data-id="1">
+            <div id="range1" class="slider-range-track"></div>
+            <div id="thumb1_L" class="slider-thumb"></div>
+            <div id="thumb1_R" class="slider-thumb"></div>
+          </div>
+          大？
+          <span id="val1" class="slider-value"></span>
+        </div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span>性癖2</span></div>
+        <div class="custom-slider-container">
+          小？
+          <div class="slider-track-wrapper" data-min="2" data-max="5" data-id="2">
+            <div id="range2" class="slider-range-track"></div>
+            <div id="thumb2_L" class="slider-thumb"></div>
+            <div id="thumb2_R" class="slider-thumb"></div>
+          </div>
+          大？
+          <span id="val2" class="slider-value"></span>
+        </div>
+      </div>
+
+      <div class="other-seiheki-group">
+        <label for="other-seiheki">その他性癖</label>
+        <textarea type="text" id="other-seiheki" placeholder=""></textarea>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button class="download-btn" onclick="downloadPDF()">ダウンロード</button>
+    </div>
+
+    <script>
+      document.querySelectorAll('.slider-track-wrapper').forEach(wrapper => {
+        const id = wrapper.getAttribute('data-id');
+        const rangeEl = document.getElementById(`range${id}`);
+        const thumbLEl = document.getElementById(`thumb${id}_L`);
+        const thumbREl = document.getElementById(`thumb${id}_R`);
+        const textEl = document.getElementById(`val${id}`);
+
+        let isDragging = false;
+        let activeThumb = null;
+
+        function renderSlider(min, max) {
+          const leftPercent = ((min - 1) / 9) * 100;
+          const rightPercent = ((max - 1) / 9) * 100;
+
+          thumbLEl.style.left = leftPercent + '%';
+          thumbREl.style.left = rightPercent + '%';
+          rangeEl.style.left = leftPercent + '%';
+          rangeEl.style.width = (rightPercent - leftPercent) + '%';
+          textEl.innerText = `${min} 〜 ${max}`;
+        }
+
+        function updateSlider(clientX) {
+          const rect = wrapper.getBoundingClientRect();
+          const clickX = clientX - rect.left;
+          let percentage = clickX / rect.width;
+          if (percentage < 0) percentage = 0;
+          if (percentage > 1) percentage = 1;
+
+          const clickedValue = Math.round(percentage * 9) + 1;
+          let currentMin = parseInt(wrapper.getAttribute('data-min'));
+          let currentMax = parseInt(wrapper.getAttribute('data-max'));
+
+          if (!activeThumb) {
+            const distToMin = Math.abs(clickedValue - currentMin);
+            const distToMax = Math.abs(clickedValue - currentMax);
+            if (distToMin < distToMax) {
+              activeThumb = 'L';
+            } else if (distToMin > distToMax) {
+              activeThumb = 'R';
+            } else {
+              activeThumb = clickedValue < currentMin ? 'L' : 'R';
+            }
+          }
+
+          if (activeThumb === 'L') {
+            currentMin = Math.min(clickedValue, currentMax);
+          } else {
+            currentMax = Math.max(clickedValue, currentMin);
+          }
+
+          wrapper.setAttribute('data-min', currentMin);
+          wrapper.setAttribute('data-max', currentMax);
+
+          renderSlider(currentMin, currentMax);
+        }
+
+        const initMin = parseInt(wrapper.getAttribute('data-min'));
+        const initMax = parseInt(wrapper.getAttribute('data-max'));
+        renderSlider(initMin, initMax);
+
+        function onStart(e) {
+          isDragging = true;
+          activeThumb = null;
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          updateSlider(clientX);
+        }
+        function onMove(e) {
+          if (!isDragging) return;
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          updateSlider(clientX);
+        }
+        function onEnd() {
+          isDragging = false;
+          activeThumb = null;
+        }
+        wrapper.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+        wrapper.addEventListener('touchstart', onStart, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: true });
+        window.addEventListener('touchend', onEnd);
+      });
+
+      document.querySelectorAll('textarea').forEach(textarea => {
+        textarea.addEventListener('input', () => {
+          textarea.style.height = 'auto';
+          textarea.style.height = textarea.scrollHeight + 'px';
+        });
+      });
+
+      function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const element = document.getElementById('pdf-content');
+        const btn = document.querySelector('.download-btn');
+
+        btn.disabled = true;
+        btn.innerText = 'PDFを生成中...';
+        element.classList.add('hide-thumbs');
+
+        html2canvas(element, {
+          scale: 2,
+          useCORS: true
+        }).then(canvas => {
+          element.classList.remove('hide-thumbs');
+          const imgData = canvas.toDataURL('image/png');
+          const imgWidth = 210;
+          const pageHeight = 297;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          let heightLeft = imgHeight;
+          let position = 0;
+
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+
+          while (heightLeft > 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+          }
+
+          pdf.save('seiheki_sheet.pdf');
+          btn.disabled = false;
+          btn.innerText = 'ダウンロード';
+        }).catch(err => {
+            element.classList.remove('hide-thumbs');
+            console.error(err);
+            alert('PDFの作成に失敗しました。');
+            btn.disabled = false;
+            btn.innerText = 'ダウンロード';
+        });
+      }
+    </script>
+  </body>
+</html>
